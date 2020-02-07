@@ -1,5 +1,5 @@
 import prefect
-from prefect import Flow, task
+from prefect import Flow, Task, task
 import time
 from datetime import timedelta, timezone, datetime
 from prefect.schedules import IntervalSchedule
