@@ -1,12 +1,11 @@
-from inflect import engine
 from prefect import Flow, task
 from random import uniform
 
 @task
 def dynamic_task(i):
-    print(engine(i) + " Task")
+    print(f"{i} Task")
 
-with Flow("Dynamic Tasks") as DynamicTasksFlow:
+with Flow("Dynamic Tasks") as flow:
     j = 0
     for i in range(50):
         k = uniform(0, j)
