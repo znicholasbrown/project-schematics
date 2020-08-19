@@ -17,7 +17,9 @@ with Flow("Dynamic Tasks") as flow:
 
 
 flow.storage = GitHub(
-    repo="znicholasbrown/project-schematics", path="flows/DynamicTasks.py",
+    repo="znicholasbrown/project-schematics",
+    path="flows/DynamicTasks.py",
+    secrets=["GITHUB_AUTH_TOKEN"],
 )
 
 

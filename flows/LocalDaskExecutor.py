@@ -57,7 +57,9 @@ flow.environment = LocalEnvironment(
 
 
 flow.storage = GitHub(
-    repo="znicholasbrown/project-schematics", path="flows/LocalDaskExecutor.py",
+    repo="znicholasbrown/project-schematics",
+    path="flows/LocalDaskExecutor.py",
+    secrets=["GITHUB_AUTH_TOKEN"],
 )
 
 
