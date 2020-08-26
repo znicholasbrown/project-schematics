@@ -24,7 +24,7 @@ with Flow("Single Mapped Task", schedule=schedule) as flow:
 
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
-    path="flows/LocalDaskExecutor.py",
+    path="flows/SingleMappedTask.py",
     secrets=["GITHUB_AUTH_TOKEN"],
 )
 
