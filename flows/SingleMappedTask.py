@@ -13,9 +13,11 @@ class MapHandler(Task):
         return
 
 
+default_range = list(range(30))
+
 schedule = IntervalSchedule(interval=timedelta(minutes=1.5))
 with Flow("Single Mapped Task", schedule=schedule) as flow:
-    parameter = Parameter("no_tasks", default=range(30))
+    parameter = Parameter("no_tasks", default=default_range)
 
     MapHandler().map(parameter)
 
