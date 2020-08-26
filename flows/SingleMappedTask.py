@@ -9,11 +9,11 @@ from datetime import timedelta
 class MapHandler(Task):
     def run(self, item):
         self.logger.info(item)
-        time.sleep()
+        time.sleep(5)
         return
 
 
-schedule = IntervalSchedule(interval=timedelta(minutes=30))
+schedule = IntervalSchedule(interval=timedelta(minutes=1.5))
 with Flow("Single Mapped Task", schedule=schedule) as flow:
     parameter = Parameter("no_tasks", default=range(30))
 
