@@ -6,7 +6,7 @@ import time
 from datetime import timedelta
 
 
-def MapHandler(Task):
+class MapHandler(Task):
     def run(self, item):
         self.logger.info(item)
         time.sleep()
