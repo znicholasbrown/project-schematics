@@ -57,8 +57,10 @@ class Add(Task):
             y: {y}
         """
         )
-        time.sleep(5)
-        return
+        if x % 2 == 0:
+            raise Exception("I failed on purpose")
+
+        return x + y
 
 
 default_range = list(range(10))
