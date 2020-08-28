@@ -14,9 +14,9 @@ class MapHandler(Task):
         sys.exit()
 
 
-default_range = list(range(5))
+default_range = list(range(3))
 
-schedule = IntervalSchedule(interval=timedelta(minutes=1.5))
+schedule = IntervalSchedule(interval=timedelta(hours=1))
 with Flow("Local Zombie Tasks", schedule=schedule) as flow:
     parameter = Parameter("no_tasks", default=default_range)
 
