@@ -63,7 +63,7 @@ class Add(Task):
 
 default_range = list(range(10))
 
-with Flow("Single Mapped Task") as flow:
+with Flow("Prefect Result") as flow:
     parameter = Parameter("no_tasks", default=default_range)
     prefect_result = Add().map(parameter)
 
