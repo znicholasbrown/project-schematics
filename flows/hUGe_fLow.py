@@ -7,7 +7,9 @@ with Flow("hUGe fLow") as flow:
 
 
 flow.storage = GitHub(
-    repo="znicholasbrown/project-schematics", path="flows/hUGe_fLow.py",
+    repo="znicholasbrown/project-schematics",
+    path="flows/hUGe_fLow.py",
+    secrets=["GITHUB_AUTH_TOKEN"],
 )
 
 
