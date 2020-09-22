@@ -1,7 +1,7 @@
 import random
 from datetime import timedelta, time
 import prefect
-from prefect import task, Flow
+from prefect import Task, Flow
 from prefect.environments.storage import GitHub
 from prefect.schedules import Schedule
 from prefect.schedules.clocks import IntervalClock
