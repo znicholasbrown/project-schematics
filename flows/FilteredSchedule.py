@@ -51,12 +51,13 @@ with Flow("Multi-level Parallel Mapping", schedule=schedule) as flow:
     node4_1 = Node(name="Node 4_1").map(upstream_tasks=[node3_1, node3_2])
 
 flow.environment = LocalEnvironment(
-    labels=[], executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
+    labels=[],
+    executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
 )
 
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
-    path="flows/hUGe_fLow.py",
+    path="flows/FilteredSchedule.py",
     secrets=["GITHUB_AUTH_TOKEN"],
 )
 
