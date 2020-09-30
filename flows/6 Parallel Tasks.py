@@ -27,7 +27,7 @@ class Root(Task):
 class Node(Task):
     def run(self):
         self.logger.info(f"{self.name} running...")
-        time.sleep(random.randint(1, 5))
+        time.sleep(random.randint(1, 240))
         if random.random() > 0.98:
             raise ValueError(f"{self.name} failed :(")
         else:
@@ -35,7 +35,7 @@ class Node(Task):
             return list(range(5))
 
 
-schedule = IntervalSchedule(interval=timedelta(minutes=1))
+schedule = IntervalSchedule(interval=timedelta(minutes=5))
 with Flow("6 Parallel Runs", schedule=schedule) as flow:
     version = Version()
 
