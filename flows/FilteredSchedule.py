@@ -8,7 +8,7 @@ from prefect.schedules.clocks import IntervalClock
 from prefect.engine.executors import LocalDaskExecutor
 from prefect.environments import LocalEnvironment
 
-from prefect.schedules.filters import is_day_of_week, is_month_end
+from prefect.schedules.filters import is_day_of_week, is_month_start
 
 
 class Version(Task):
@@ -37,7 +37,7 @@ class Node(Task):
 
 
 schedule = Schedule(
-    clocks=[IntervalClock(timedelta(hours=12))], filters=[is_day_of_week(day_of_week=2)]
+    clocks=[IntervalClock(timedelta(hours=12))], filters=[is_month_start]
 )
 with Flow("Multi-level Parallel Mapping", schedule=schedule) as flow:
     version = Version()
