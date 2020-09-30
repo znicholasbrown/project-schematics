@@ -77,7 +77,7 @@ flow.environment = LocalEnvironment(
 
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
-    path="flows/6 Paralel Tasks.py",
+    path="flows/6 Parallel Tasks.py",
     secrets=["GITHUB_AUTH_TOKEN"],
 )
 
