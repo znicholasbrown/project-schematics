@@ -21,7 +21,7 @@ with Flow("Configurable Sleepy Flow", schedule=schedule) as flow:
 
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
-    path="flows/Configurable Sleepy Flow.py",
+    path="flows/Configurable_Sleep.py",
     secrets=["GITHUB_AUTH_TOKEN"],
 )
 
