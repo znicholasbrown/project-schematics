@@ -17,7 +17,10 @@ class Node(Task):
 schedule = IntervalSchedule(interval=timedelta(minutes=5))
 with Flow("Configurable Sleepy Flow", schedule=schedule) as flow:
     sleep = Parameter("seconds", default=240)
-    node1_1 = Node(name="Sleepy Node")(sleep=sleep)
+    node1_1 = Node(
+        name="Sleepy Node",
+        task_run_name=lambda **kwargs: f"Sleep Node ({kwargs['sleep']} seconds)",
+    )(sleep=sleep)
 
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
