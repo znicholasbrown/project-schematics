@@ -82,7 +82,9 @@ flow.storage = GitHub(
     secrets=["GITHUB_AUTH_TOKEN"],
 )
 
-flow.run_config = KubernetesRun()
+flow.run_config = KubernetesRun(
+    labels=["testing", "kubernetes", "run", "config", "labels"]
+)
 
 
 flow.register(project_name="PROJECT: Schematics")
