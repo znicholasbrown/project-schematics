@@ -8,6 +8,7 @@ from prefect.environments.storage import GitHub
 from prefect.engine.executors import LocalDaskExecutor
 from prefect.environments import LocalEnvironment
 from prefect.engine.results import LocalResult
+from prefect.run_configs import KubernetesRun
 
 
 class Version(Task):
@@ -80,6 +81,8 @@ flow.storage = GitHub(
     path="flows/6 Parallel Tasks.py",
     secrets=["GITHUB_AUTH_TOKEN"],
 )
+
+flow.run_config = KubernetesRun()
 
 
 flow.register(project_name="PROJECT: Schematics")
