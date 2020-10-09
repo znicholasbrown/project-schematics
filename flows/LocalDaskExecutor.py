@@ -12,26 +12,26 @@ from prefect.engine.results import LocalResult
 
 class Version(Task):
     def run(self):
-        self.logger.info(f"Running on Prefect v{prefect.__version__}")
+        self.logger.debug(f"Running on Prefect v{prefect.__version__}")
         return
 
 
 class Root(Task):
     def run(self):
-        self.logger.info("Root running...")
+        self.logger.debug("Root running...")
         time.sleep(random.randint(1, 5))
-        self.logger.info("Root complete.")
+        self.logger.debug("Root complete.")
         return list(range(5))
 
 
 class Node(Task):
     def run(self):
-        self.logger.info(f"{self.name} running...")
+        self.logger.debug(f"{self.name} running...")
         time.sleep(random.randint(1, 5))
         if random.random() > 0.98:
             raise ValueError(f"{self.name} failed :(")
         else:
-            self.logger.info(f"{self.name} complete.")
+            self.logger.debug(f"{self.name} complete.")
             return list(range(5))
 
 
@@ -52,7 +52,8 @@ with Flow("Mapped - Local Dask Executor", schedule=schedule) as flow:
     )
 
 flow.environment = LocalEnvironment(
-    labels=[], executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
+    labels=[],
+    executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
 )
 
 
