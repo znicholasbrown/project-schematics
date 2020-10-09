@@ -12,26 +12,26 @@ from prefect.engine.results import LocalResult
 
 class Version(Task):
     def run(self):
-        self.logger.debug(f"Running on Prefect v{prefect.__version__}")
+        self.logger.info(f"Running on Prefect v{prefect.__version__}")
         return
 
 
 class Root(Task):
     def run(self):
-        self.logger.debug("Root running...")
+        self.logger.info("Root running...")
         time.sleep(random.randint(1, 5))
-        self.logger.debug("Root complete.")
+        self.logger.info("Root complete.")
         return list(range(5))
 
 
 class Node(Task):
     def run(self):
-        self.logger.debug(f"{self.name} running...")
+        self.logger.info(f"{self.name} running...")
         time.sleep(random.randint(1, 5))
         if random.random() > 0.98:
             raise ValueError(f"{self.name} failed :(")
         else:
-            self.logger.debug(f"{self.name} complete.")
+            self.logger.info(f"{self.name} complete.")
             return list(range(5))
 
 
