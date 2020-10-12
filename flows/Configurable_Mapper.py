@@ -915,11 +915,11 @@ with Flow("Configurable Mapper", schedule=schedule) as flow:
         ),
     ).map(i=i)
 
-flow.storage = GitHub(
-    repo="znicholasbrown/project-schematics",
-    path="flows/Configurable_Mapper.py",
-    secrets=["GITHUB_AUTH_TOKEN"],
-)
+# flow.storage = GitHub(
+#     repo="znicholasbrown/project-schematics",
+#     path="flows/Configurable_Mapper.py",
+#     secrets=["GITHUB_AUTH_TOKEN"],
+# )
 
 # flow.run(run_on_schedule=False)
 flow.register(project_name="PROJECT: Schematics")
