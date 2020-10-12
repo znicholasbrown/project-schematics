@@ -10,9 +10,7 @@ from num2words import num2words as convert
 from emoji import emojize
 
 emojis = [
-    ":bowtie:",
     ":smile:",
-    ":simple_smile:",
     ":laughing:",
     ":blush:",
     ":smiley:",
@@ -910,8 +908,9 @@ with Flow("Configurable Mapper", schedule=schedule) as flow:
     node1_1 = Node(
         name="Mapped Node",
         task_run_name=lambda **kwargs: emojize(
-            f"{convert(kwargs['i'], to='ordinal')} child {emojis[kwargs['i']]}",
+            f"{convert(kwargs['i'], to='ordinal')} child {emojis[kwargs['i'] if kwargs['i'] <= len(emojis) else random.randint(0, len(emojis) - 1)]}",
             use_aliases=True,
+            variant="emoji_type",
         ),
     ).map(i=i)
 
