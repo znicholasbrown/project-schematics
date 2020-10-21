@@ -7,6 +7,8 @@ from prefect.schedules import IntervalSchedule
 from prefect.environments.storage import GitHub
 from prefect.engine.results import LocalResult
 from num2words import num2words as convert
+from prefect.engine.executors import LocalDaskExecutor
+from prefect.environments import LocalEnvironment
 from emoji import emojize
 
 emojis = [
@@ -913,6 +915,10 @@ with Flow("Configurable Mapper", schedule=schedule) as flow:
             variant="emoji_type",
         ),
     ).map(i=i)
+
+flow.environment = LocalEnvironment(
+    labels=[], executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
+)
 
 # flow.storage = GitHub(
 #     repo="znicholasbrown/project-schematics",

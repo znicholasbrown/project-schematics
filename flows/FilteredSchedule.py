@@ -37,7 +37,8 @@ class Node(Task):
 
 
 schedule = Schedule(
-    clocks=[IntervalClock(timedelta(hours=12))], filters=[is_month_start]
+    clocks=[IntervalClock(timedelta(hours=12))],
+    filters=[is_month_start, is_day_of_week(2)],
 )
 with Flow("Multi-level Parallel Mapping", schedule=schedule) as flow:
     version = Version()
