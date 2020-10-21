@@ -1,5 +1,6 @@
 import random
-from datetime import timedelta, time
+from datetime import timedelta
+import time
 import prefect
 from prefect import Task, Flow
 from prefect.environments.storage import GitHub
