@@ -26,7 +26,7 @@ class Root(Task):
 class Node(Task):
     def run(self):
         self.logger.info(f"{self.name} running...")
-        time.sleep(random.randint(1, 240))
+        time.sleep(random.randint(1, 5))
         if random.random() > 0.98:
             raise ValueError(f"{self.name} failed :(")
         else:
