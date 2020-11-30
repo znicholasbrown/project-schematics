@@ -80,6 +80,7 @@ flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
     path="flows/6 Parallel Tasks.py",
     secrets=["GITHUB_AUTH_TOKEN"],
+    ref="master",
 )
 
 flow.register(project_name="PROJECT: Schematics")
