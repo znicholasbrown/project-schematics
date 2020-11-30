@@ -18,8 +18,9 @@ class Version(Task):
 
 
 class Sleeper(Task):
-    def run(self):
+    def run(self, i):
         self.logger.info(f"{self.name} running...")
+        self.logger.info(f"Recieved value {i}")
         time.sleep(random.randint(1, 240))
         self.logger.info(f"{self.name} complete.")
         return list(range(5))
