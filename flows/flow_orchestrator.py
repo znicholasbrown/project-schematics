@@ -1,7 +1,7 @@
 import prefect
 from prefect import Flow, task, Parameter
 from prefect.tasks.prefect import StartFlowRun
-from prefect.environments.storage import GitHub
+from prefect.storage import GitHub
 
 
 @task
