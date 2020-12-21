@@ -10,14 +10,6 @@ def return_input(input: any):
     return input
 
 
-@task
-def log_all_results(results: List[any]):
-    logger = prefect.context.get("logger")
-
-    for result in results:
-        logger.info(result)
-
-
 flow_storage = GitHub(
     repo="znicholasbrown/project-schematics",
     path="flows/flow_orchestrator.py",
@@ -39,6 +31,14 @@ with Flow("Orchestration Depenency B") as flow_b:
 
 flow_b.storage = flow_storage
 flow_b.register(project_name="PROJECT: Schematics")
+
+
+@task
+def log_all_results(results: List[any]):
+    logger = prefect.context.get("logger")
+
+    for result in results:
+        logger.info(result)
 
 
 with Flow("Orchestration Orchestrator") as flow_c:
