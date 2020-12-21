@@ -10,9 +10,11 @@ def return_input(input: any):
 
 
 @task
-def log_result_with_logger(result: any):
+def log_results(results: list[any]):
     logger = prefect.context.get("logger")
-    logger.info(result)
+
+    for result in results:
+        logger.info(result)
 
 
 flow_storage = GitHub(
@@ -50,8 +52,8 @@ with Flow("Orchestration Orchestrator") as flow_c:
         wait=True,
     )(flow_name="Orchestration Dependency B", run_name="ODEP-B")
 
-    print_a = log_result_with_logger(result=a)
-    print_b = log_result_with_logger(result=b)
+    log_results(results=[a, b])
 
 flow_c.storage = flow_storage
+# flow_c.run()
 flow_c.register(project_name="PROJECT: Schematics")
