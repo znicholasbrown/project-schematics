@@ -1,3 +1,4 @@
+from typing import List
 import prefect
 from prefect import Flow, task, Parameter
 from prefect.tasks.prefect import StartFlowRun
@@ -10,7 +11,7 @@ def return_input(input: any):
 
 
 @task
-def log_results(results: list[any]):
+def log_results(results: List[any]):
     logger = prefect.context.get("logger")
 
     for result in results:
