@@ -17,7 +17,7 @@ flow_storage = GitHub(
     ref="master",
 )
 
-with Flow("Orchestration Depenency A") as flow_a:
+with Flow("Orchestration Dependency A") as flow_a:
     input = Parameter("input", default="Hello, World!")
     return_input(input=input)
 
@@ -25,7 +25,7 @@ with Flow("Orchestration Depenency A") as flow_a:
 flow_a.storage = flow_storage
 flow_a.register(project_name="PROJECT: Schematics")
 
-with Flow("Orchestration Depenency B") as flow_b:
+with Flow("Orchestration Dependency B") as flow_b:
     input = Parameter("input", default="Goodbye, World!")
     return_input(input=input)
 
