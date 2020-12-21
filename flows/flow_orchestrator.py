@@ -10,7 +10,7 @@ def return_input(input: any):
 
 
 @task
-def log_result(result: any):
+def log_result_with_logger(result: any):
     logger = prefect.context.get("logger")
     logger.info(result)
 
@@ -54,8 +54,8 @@ with Flow("Orchestration Orchestrator") as flow_c:
         flow_name="Orchestration Dependency B",
     )
 
-    print_a = log_result(result=a)
-    print_b = log_result(result=b)
+    print_a = log_result_with_logger(result=a)
+    print_b = log_result_with_logger(result=b)
 
 flow_c.storage = flow_storage
 flow_c.register(project_name="PROJECT: Schematics")
