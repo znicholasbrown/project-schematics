@@ -11,7 +11,7 @@ def return_input(input: any):
 
 
 @task
-def log_results(results: List[any]):
+def log_all_results(results: List[any]):
     logger = prefect.context.get("logger")
 
     for result in results:
@@ -53,7 +53,7 @@ with Flow("Orchestration Orchestrator") as flow_c:
         wait=True,
     )(flow_name="Orchestration Dependency B", run_name="ODEP-B")
 
-    log_results(results=[a, b])
+    log_all_results(results=[a, b])
 
 flow_c.storage = flow_storage
 # flow_c.run()
