@@ -43,16 +43,12 @@ with Flow("Orchestration Orchestrator") as flow_c:
         project_name="PROJECT: Schematics",
         parameters={input: "¡Hola, mundo!"},
         wait=True,
-    )(
-        flow_name="Orchestration Dependency A",
-    )
+    )(flow_name="Orchestration Dependency A", run_name="ODEP-A")
     b = StartFlowRun(
         project_name="PROJECT: Schematics",
         parameters={input: "¡Adiós, mundo!"},
         wait=True,
-    )(
-        flow_name="Orchestration Dependency B",
-    )
+    )(flow_name="Orchestration Dependency B", run_name="ODEP-B")
 
     print_a = log_result_with_logger(result=a)
     print_b = log_result_with_logger(result=b)
