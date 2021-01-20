@@ -3,7 +3,6 @@ import prefect
 from prefect import Flow, task, Parameter
 from prefect.tasks.prefect import StartFlowRun
 from prefect.storage import GitHub
-import re
 
 
 @task
@@ -24,20 +23,21 @@ with Flow("Orchestration Dependency A") as flow_a:
 
 
 flow_a.storage = flow_storage
-# flow_a.register(project_name="PROJECT: Schematics")
+flow_a.register(project_name="PROJECT: Schematics")
 
 with Flow("Orchestration Dependency B") as flow_b:
     input = Parameter("input", default="Goodbye, World!")
     return_input(input=input)
 
 flow_b.storage = flow_storage
-# flow_b.register(project_name="PROJECT: Schematics")
+flow_b.register(project_name="PROJECT: Schematics")
 
 
 @task
 def get_id(input):
     id = input.state.message.split(" ", 1)[0]
-    print(id)
+    logger = prefect.context.get("logger")
+    logger.debug(id)
     return id
 
 
