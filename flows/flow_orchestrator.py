@@ -66,7 +66,7 @@ with Flow("Orchestration Orchestrator") as flow_c:
 
     get_id(b)
 
-    log_all_results(results=[a, b])
+    # log_all_results(results=[a, b])
 
 flow_c.storage = flow_storage
 # flow_c.run()
