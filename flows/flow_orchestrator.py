@@ -3,6 +3,7 @@ import prefect
 from prefect import Flow, task, Parameter
 from prefect.tasks.prefect import StartFlowRun
 from prefect.storage import GitHub
+import re
 
 
 @task
@@ -23,14 +24,21 @@ with Flow("Orchestration Dependency A") as flow_a:
 
 
 flow_a.storage = flow_storage
-flow_a.register(project_name="PROJECT: Schematics")
+# flow_a.register(project_name="PROJECT: Schematics")
 
 with Flow("Orchestration Dependency B") as flow_b:
     input = Parameter("input", default="Goodbye, World!")
     return_input(input=input)
 
 flow_b.storage = flow_storage
-flow_b.register(project_name="PROJECT: Schematics")
+# flow_b.register(project_name="PROJECT: Schematics")
+
+
+@task
+def get_id(input):
+    id = input.state.message.split(" ", 1)[0]
+    print(id)
+    return id
 
 
 @task
@@ -38,7 +46,7 @@ def log_all_results(results: List[any]):
     logger = prefect.context.get("logger")
 
     for result in results:
-        logger.info(result)
+        logger.info(type(result))
 
 
 with Flow("Orchestration Orchestrator") as flow_c:
@@ -47,11 +55,16 @@ with Flow("Orchestration Orchestrator") as flow_c:
         parameters={"input": "¡Hola, mundo!"},
         wait=True,
     )(flow_name="Orchestration Dependency A", run_name="ODEP-A")
+
+    get_id(a)
+
     b = StartFlowRun(
         project_name="PROJECT: Schematics",
         parameters={"input": "¡Adiós, mundo!"},
         wait=True,
     )(flow_name="Orchestration Dependency B", run_name="ODEP-B")
+
+    get_id(b)
 
     log_all_results(results=[a, b])
 
