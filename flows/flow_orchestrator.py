@@ -56,7 +56,7 @@ with Flow("Orchestration Orchestrator") as flow_c:
         wait=True,
     )(flow_name="Orchestration Dependency A", run_name="ODEP-A")
 
-    get_id(a)
+    # get_id(a)
 
     b = StartFlowRun(
         project_name="PROJECT: Schematics",
@@ -64,7 +64,7 @@ with Flow("Orchestration Orchestrator") as flow_c:
         wait=True,
     )(flow_name="Orchestration Dependency B", run_name="ODEP-B")
 
-    get_id(b)
+    # get_id(b)
 
     # log_all_results(results=[a, b])
 
