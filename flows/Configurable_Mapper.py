@@ -1,5 +1,5 @@
 import prefect
-from prefect import Flow, Task, task, Parameter
+from prefect import Flow, Task, task, Parameter, unmapped
 import time
 import random
 from datetime import timedelta, timezone, datetime
@@ -896,14 +896,16 @@ class CreateIterable(Task):
 
 
 class Node(Task):
-    def run(self, i):
+    def run(self, i, sleep_length):
+        time.sleep(sleep_length)
         self.logger.info(f"{self.name}: {self.task_run_name} ({i})")
         return i
 
 
-schedule = IntervalSchedule(interval=timedelta(minutes=5))
+schedule = IntervalSchedule(interval=timedelta(minutes=30))
 with Flow("Configurable Mapper", schedule=schedule) as flow:
     count = Parameter("count", default=10)
+    sleep_length = Parameter("sleep_length", default=10)
 
     i = CreateIterable()(count=count)
 
@@ -914,17 +916,18 @@ with Flow("Configurable Mapper", schedule=schedule) as flow:
             use_aliases=True,
             variant="emoji_type",
         ),
-    ).map(i=i)
+    ).map(i=i, sleep_length=unmapped(sleep_length))
 
 flow.environment = LocalEnvironment(
-    labels=[], executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
+    labels=[],
+    executor=LocalDaskExecutor(scheduler="threads", num_workers=6),
 )
 
-# flow.storage = GitHub(
-#     repo="znicholasbrown/project-schematics",
-#     path="flows/Configurable_Mapper.py",
-#     secrets=["GITHUB_AUTH_TOKEN"],
-# )
+flow.storage = GitHub(
+    repo="znicholasbrown/project-schematics",
+    path="flows/Configurable_Mapper.py",
+    secrets=["GITHUB_AUTH_TOKEN"],
+)
 
 # flow.run(run_on_schedule=False)
 flow.register(project_name="PROJECT: Schematics")
