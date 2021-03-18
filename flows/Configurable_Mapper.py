@@ -4,7 +4,7 @@ import time
 import random
 from datetime import timedelta, timezone, datetime
 from prefect.schedules import IntervalSchedule
-from prefect.environments.storage import GitHub
+from prefect.storage import GitHub
 from prefect.engine.results import LocalResult
 from num2words import num2words as convert
 from prefect.engine.executors import LocalDaskExecutor
@@ -926,7 +926,7 @@ flow.environment = LocalEnvironment(
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
     path="flows/Configurable_Mapper.py",
-    secrets=["GITHUB_AUTH_TOKEN"],
+    secrets=["NICHOLAS_GITHUB_ACCESS"],
 )
 
 # flow.run(run_on_schedule=False)
