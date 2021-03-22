@@ -926,7 +926,7 @@ flow.environment = LocalEnvironment(
 flow.storage = GitHub(
     repo="znicholasbrown/project-schematics",
     path="flows/Configurable_Mapper.py",
-    secrets=["NICHOLAS_GITHUB_ACCESS"],
+    access_token_secret="NICHOLAS_GITHUB_ACCESS",
 )
 
 # flow.run(run_on_schedule=False)
